@@ -1,9 +1,10 @@
-from bson import ObjectId
-
+from DOU_HTML.DOU_HTML.model import licitacao_out
 from DOU_HTML.DOU_HTML.service import dou_service
 
-lista = [{"_id": ObjectId("5d73c3bcb96ae88797e0390e")},
-         {"_id": ObjectId("5d73c3f6b96ae88797e03914")}]
-
-for item in lista:
-    dou_service.delete("classificado", item)
+objs = dou_service.find_all("classificado")
+for obj in objs:
+    novo = licitacao_out.LicitacaoOut(obj.get("data").get("titulos")[0],
+                                      obj.get("data").get("corpo")[0],
+                                      obj.get("tag_pregao"),
+                                      obj.get("tag_tipo"))
+    dou_service.salva_obj(novo, "licitacao_saida")

@@ -32,3 +32,8 @@ def find_all(client):
 def delete(client, query):
     db = collection_start(client)
     print(db.delete_one(query))
+
+
+def find_one(client):
+    db = collection_start(client)
+    return db.find_one()
