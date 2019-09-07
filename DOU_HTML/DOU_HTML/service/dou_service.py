@@ -27,3 +27,8 @@ def salva_obj(objeto, client):
 def find_all(client):
     db = collection_start(client)
     return db.find()
+
+
+def delete(client, query):
+    db = collection_start(client)
+    print(db.delete_one(query))
